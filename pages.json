@@ -1,0 +1,47 @@
+{
+  "pages": [
+    {
+      "path": "pages/auth/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/auth/register",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    },
+    {
+      "path": "pages/friend/list",
+      "style": {
+        "navigationBarTitleText": "好友列表"
+      }
+    },
+    {
+      "path": "pages/friend/requests",
+      "style": {
+        "navigationBarTitleText": "好友请求"
+      }
+    },
+    {
+      "path": "pages/friend/search",
+      "style": {
+        "navigationBarTitleText": "搜索用户"
+      }
+    },
+    {
+      "path": "pages/chat/session",
+      "style": {
+        "navigationBarTitleText": "聊天"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "IM",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f7f7f7"
+  }
+}
+
