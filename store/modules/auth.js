@@ -37,11 +37,15 @@ const mutations = {
 };
 
 const actions = {
-  async login({ commit, dispatch }, payload) {
+  async login({ commit, dispatch, rootState }, payload) {
     const data = await login(payload);
     commit('setToken', data.access_token);
     await dispatch('fetchMe');
     connect(data.access_token);
+    // 登录后同步一次未读消息
+    if (rootState.messages) {
+      dispatch('messages/syncUnread', null, { root: true });
+    }
   },
   async register({ dispatch }, payload) {
     await register(payload);

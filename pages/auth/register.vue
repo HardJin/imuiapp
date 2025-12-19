@@ -43,7 +43,7 @@ export default {
       try {
         await this.register(this.form);
         uni.showToast({ title: '注册并登录成功', icon: 'success' });
-        uni.reLaunch({ url: '/pages/friend/list' });
+        uni.reLaunch({ url: '/pages/im/index' });
       } finally {
         this.loading = false;
       }

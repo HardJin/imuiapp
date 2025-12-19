@@ -6,6 +6,11 @@ const handleError = (err) => {
 };
 
 const request = (options) => {
+  const agreed = uni.getStorageSync('privacy_agreed_version');
+  if (!agreed) {
+    uni.showToast({ title: '请先阅读并同意隐私政策', icon: 'none' });
+    return Promise.reject({ code: 499, message: 'privacy not agreed' });
+  }
   const token = uni.getStorageSync(storageKeys.token);
   const headers = options.header || {};
   if (token) {

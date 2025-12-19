@@ -13,6 +13,12 @@
       }
     },
     {
+      "path": "pages/im/index",
+      "style": {
+        "navigationBarTitleText": "IM"
+      }
+    },
+    {
       "path": "pages/friend/list",
       "style": {
         "navigationBarTitleText": "好友列表"
@@ -35,6 +41,30 @@
       "style": {
         "navigationBarTitleText": "聊天"
       }
+    },
+    {
+      "path": "pages/common/webview",
+      "style": {
+        "navigationBarTitleText": "详情"
+      }
+    },
+    {
+      "path": "pages/settings/about",
+      "style": {
+        "navigationBarTitleText": "关于与协议"
+      }
+    },
+    {
+      "path": "pages/settings/privacy",
+      "style": {
+        "navigationBarTitleText": "隐私中心"
+      }
+    },
+    {
+      "path": "pages/profile/me",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
     }
   ],
   "globalStyle": {
@@ -42,6 +72,26 @@
     "navigationBarTitleText": "IM",
     "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#f7f7f7"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#007aff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/im/index",
+        "text": "IM"
+      },
+      {
+        "pagePath": "pages/friend/list",
+        "text": "好友"
+      },
+      {
+        "pagePath": "pages/profile/me",
+        "text": "我的"
+      }
+    ]
   }
 }
 
