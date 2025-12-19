@@ -1,8 +1,8 @@
 {
-    "name" : "imuiapp",
+    "name" : "乐友",
     "appid" : "__UNI__E025E72",
     "description" : "IM聊天前端，基于UniApp官方Vue2模板",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.1",
     "versionCode" : 100,
     "transformPx" : false,
     "app-plus" : {
