@@ -80,8 +80,9 @@ const mutations = {
 
 const normalizeMessage = (msg) => ({
   id: msg.message_id || msg.id || null,
-  from_user_id: msg.from_user_id,
-  to_user_id: msg.to_user_id,
+  // 兼容历史记录可能使用 sender_id / receiver_id 字段的情况
+  from_user_id: msg.from_user_id || msg.sender_id,
+  to_user_id: msg.to_user_id || msg.receiver_id,
   content: msg.content,
   content_type: msg.content_type || 'text',
   created_at: msg.created_at || new Date().toISOString(),
@@ -106,7 +107,8 @@ const actions = {
   },
   async sendMessage({ commit, rootState, state }, { peerId, content }) {
     const client_msg_id = `${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
-    const currentUserId = rootState.auth.user?.id;
+    const user = rootState.auth.user || {};
+    const currentUserId = user.id || user.user_id;
     const localMsg = {
       client_msg_id,
       from_user_id: currentUserId,
@@ -152,7 +154,8 @@ const actions = {
     }
   },
   receiveIncoming({ commit, rootState, state }, msg) {
-    const selfId = rootState.auth.user?.id;
+    const user = rootState.auth.user || {};
+    const selfId = user.id || user.user_id;
     if (!selfId) return;
     const peerId = msg.from_user_id === selfId ? msg.to_user_id : msg.from_user_id;
     commit('addOrUpdateMessage', { peerId, message: { ...msg, status: 'sent' } });

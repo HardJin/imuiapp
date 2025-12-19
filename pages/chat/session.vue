@@ -32,7 +32,8 @@ export default {
       return this.session.list;
     },
     selfId() {
-      return this.user?.id;
+      if (!this.user) return null;
+      return this.user.id || this.user.user_id;
     }
   },
   onLoad(options) {
@@ -52,7 +53,6 @@ export default {
     ...mapActions('messages', [
       'loadHistory',
       'sendMessage',
-      'syncUnread',
       'setActivePeer',
       'clearUnread'
     ]),
@@ -62,7 +62,6 @@ export default {
         uni.navigateBack();
         return;
       }
-      await this.syncUnread();
       await this.setActivePeer(this.peerId);
       await this.clearUnread(this.peerId);
       if (!this.messages.length) {

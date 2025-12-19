@@ -14,14 +14,17 @@
       class="row"
       :id="domId(item)"
     >
-      <view
-        class="bubble"
-        :class="item.from_user_id === currentUserId ? 'bubble-self' : 'bubble-peer'"
-      >
-        <view v-if="item.content_type === 'text'">{{ item.content }}</view>
-        <view v-else class="placeholder">暂不支持的类型：{{ item.content_type }}</view>
-        <view v-if="item.status === 'pending'" class="status">发送中...</view>
-        <view v-else-if="item.status === 'failed'" class="status status-error">发送失败</view>
+      <view class="bubble-wrap" :class="item.from_user_id === currentUserId ? 'self' : 'peer'">
+        <view
+          class="bubble"
+          :class="item.from_user_id === currentUserId ? 'bubble-self' : 'bubble-peer'"
+        >
+          <view v-if="item.content_type === 'text'">{{ item.content }}</view>
+          <view v-else class="placeholder">暂不支持的类型：{{ item.content_type }}</view>
+          <view v-if="item.status === 'pending'" class="status">发送中...</view>
+          <view v-else-if="item.status === 'failed'" class="status status-error">发送失败</view>
+        </view>
+        <view class="time">{{ formatTime(item.created_at) }}</view>
       </view>
     </view>
     <view id="bottom-anchor"></view>
@@ -66,6 +69,19 @@ export default {
   methods: {
     domId(item) {
       return `msg-${item.client_msg_id || item.id || Math.random()}`;
+    },
+    formatTime(iso) {
+      if (!iso) return '';
+      try {
+        const str = String(iso);
+        // 兼容 ISO 字符串或后端直接给的 yyyy-MM-dd HH:mm:ss
+        if (str.includes('T')) {
+          return str.replace('T', ' ').slice(0, 16);
+        }
+        return str.slice(0, 16);
+      } catch (e) {
+        return '';
+      }
     }
   }
 };
@@ -80,6 +96,18 @@ export default {
 .row {
   display: flex;
   margin-bottom: 12rpx;
+}
+.bubble-wrap {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.bubble-wrap.self {
+  margin-left: auto;
+  align-items: flex-end;
+}
+.bubble-wrap.peer {
+  align-items: flex-start;
 }
 .bubble {
   max-width: 80%;
@@ -108,6 +136,11 @@ export default {
 }
 .status-error {
   color: #ff4d4f;
+}
+.time {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #aaa;
 }
 </style>
 
